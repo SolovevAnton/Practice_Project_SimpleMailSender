@@ -1,4 +1,4 @@
-package com.solovev.simplecrmfx;
+package com.solovev.simplecrmfx.controllers;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

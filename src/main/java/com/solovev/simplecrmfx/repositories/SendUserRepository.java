@@ -5,19 +5,28 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.solovev.simplecrmfx.util.Constants;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Repo to store user IDs, to whom emails was already sent
+ */
+
 public class SendUserRepository {
-    Set<Integer> users = new HashSet<>();
-    ObjectMapper mapper = new ObjectMapper();
+    private Set<Integer> usersIDs;
+    private ObjectMapper mapper = new ObjectMapper();
 
     public SendUserRepository() {
         try {
-            users = mapper.readValue(Constants.USERS_ID, new TypeReference<>() {
+            usersIDs = mapper.readValue(Constants.USERS_ID, new TypeReference<>() {
             });
         } catch (IOException ignored) {
             throw new RuntimeException(ignored);
         }
+    }
+
+    public Set<Integer> getUsersIDs() {
+        return Collections.unmodifiableSet(usersIDs);
     }
 }

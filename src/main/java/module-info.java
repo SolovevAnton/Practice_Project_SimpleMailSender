@@ -8,4 +8,6 @@ module com.solovev.simplecrmfx {
 
     opens com.solovev.simplecrmfx to javafx.fxml;
     exports com.solovev.simplecrmfx;
+    exports com.solovev.simplecrmfx.controllers;
+    opens com.solovev.simplecrmfx.controllers to javafx.fxml;
 }
