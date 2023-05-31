@@ -1,6 +1,9 @@
 module com.solovev.simplecrmfx {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javax.mail.api;
+    requires com.fasterxml.jackson.annotation;
+    requires com.fasterxml.jackson.databind;
 
 
     opens com.solovev.simplecrmfx to javafx.fxml;
