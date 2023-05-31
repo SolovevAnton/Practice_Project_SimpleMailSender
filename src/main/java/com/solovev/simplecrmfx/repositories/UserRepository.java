@@ -27,7 +27,7 @@ public class UserRepository {
     public UserRepository(File file) throws IOException {
         this.users = objectMapper
                 .findAndRegisterModules()
-                .readValue(file, new TypeReference<Set<User>>() {
+                .readValue(file, new TypeReference<>() {
                 });
         Set<Integer> userSend = new SendUserRepository().getUsersIDs();
         users
