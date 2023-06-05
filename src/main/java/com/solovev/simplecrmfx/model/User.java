@@ -5,22 +5,20 @@ import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.*;
 
-@JsonIgnoreProperties("sent")
 public class User {
     @JsonAlias("ID")
     private int id;
 
-    @JsonAlias("name")
     private String name;
     @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss",
             shape = JsonFormat.Shape.STRING)
     @JsonAlias("regDate")
     private LocalDateTime registrationDate;
-    @JsonAlias("mail")
+
     private String email;
-    @JsonAlias("age")
+
     private int age;
-    @JsonAlias("country")
+
     private String country;
 
     @JsonIgnore

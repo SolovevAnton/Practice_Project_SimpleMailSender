@@ -2,7 +2,6 @@ package com.solovev.simplecrmfx.repositories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.solovev.simplecrmfx.model.User;
 
 import java.io.File;
@@ -28,7 +27,6 @@ public class UserRepository {
      * @throws IOException if file not found
      */
     public UserRepository(File file) throws IOException {
-        objectMapper.registerModule(new JavaTimeModule());
         this.users = objectMapper
                 .findAndRegisterModules()
                 .readValue(file, new TypeReference<>() {
@@ -42,5 +40,5 @@ public class UserRepository {
 
     public List<User> getUsers() {
         return new ArrayList<>(users);
-    } //TOO correct? returns List for observable list
+    } //TODO correct? returns List for observable list
 }
