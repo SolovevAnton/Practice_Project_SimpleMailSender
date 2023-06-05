@@ -2,11 +2,14 @@ package com.solovev.simplecrmfx.repositories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.solovev.simplecrmfx.model.User;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -25,6 +28,7 @@ public class UserRepository {
      * @throws IOException if file not found
      */
     public UserRepository(File file) throws IOException {
+        objectMapper.registerModule(new JavaTimeModule());
         this.users = objectMapper
                 .findAndRegisterModules()
                 .readValue(file, new TypeReference<>() {
@@ -32,11 +36,11 @@ public class UserRepository {
         Set<Integer> userSend = new SendUserRepository().getUsersIDs();
         users
                 .stream()
-                .filter(u -> userSend.contains(u.getID()))
-                .forEach(u -> u.setSend(true));
+                .filter(u -> userSend.contains(u.getId()))
+                .forEach(u -> u.setIsSend(true));
     }
 
-    public Set<User> getUsers() {
-        return new HashSet<>(users);
-    }
+    public List<User> getUsers() {
+        return new ArrayList<>(users);
+    } //TOO correct? returns List for observable list
 }

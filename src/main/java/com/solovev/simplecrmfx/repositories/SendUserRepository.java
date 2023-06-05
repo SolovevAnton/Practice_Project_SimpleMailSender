@@ -6,6 +6,7 @@ import com.solovev.simplecrmfx.util.Constants;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Set;
  */
 
 public class SendUserRepository {
-    private final Set<Integer> usersIDs;
+    private Set<Integer> usersIDs = new HashSet<>();
     private final ObjectMapper mapper = new ObjectMapper();
 
     public SendUserRepository() {
@@ -21,7 +22,6 @@ public class SendUserRepository {
             usersIDs = mapper.readValue(Constants.USERS_ID, new TypeReference<>() {
             });
         } catch (IOException ignored) {
-            throw new RuntimeException(ignored);
         }
     }
 

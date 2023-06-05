@@ -36,3 +36,4 @@ build/
 
 ### Mac OS ###
 .DS_Store!/Tables.docx
+!/src/main/java/com/solovev/Main.java

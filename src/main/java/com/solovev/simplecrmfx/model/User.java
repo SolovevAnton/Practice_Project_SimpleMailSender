@@ -3,23 +3,34 @@ package com.solovev.simplecrmfx.model;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 
+@JsonIgnoreProperties("sent")
 public class User {
-    private int ID;
+    @JsonAlias("ID")
+    private int id;
+
+    @JsonAlias("name")
     private String name;
+    @JsonFormat(pattern = "dd.MM.yyyy HH:mm:ss",
+            shape = JsonFormat.Shape.STRING)
+    @JsonAlias("regDate")
     private LocalDateTime registrationDate;
+    @JsonAlias("mail")
     private String email;
+    @JsonAlias("age")
     private int age;
+    @JsonAlias("country")
     private String country;
+
     @JsonIgnore
     private boolean isSend;
 
     public User() {
     }
 
-    public User(int ID, String name, LocalDateTime registrationDate, String email, int age, String country, boolean isSend) {
-        this.ID = ID;
+    public User(int id, String name, LocalDateTime registrationDate, String email, int age, String country, boolean isSend) {
+        this.id = id;
         this.name = name;
         this.registrationDate = registrationDate;
         this.email = email;
@@ -28,12 +39,12 @@ public class User {
         this.isSend = isSend;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -76,11 +87,11 @@ public class User {
         this.country = country;
     }
 
-    public boolean isSend() {
+    public boolean getIsSend() {
         return isSend;
     }
 
-    public void setSend(boolean send) {
+    public void setIsSend(boolean send) {
         isSend = send;
     }
 
@@ -91,7 +102,7 @@ public class User {
 
         User user = (User) o;
 
-        if (ID != user.ID) return false;
+        if (id != user.id) return false;
         if (age != user.age) return false;
         if (isSend != user.isSend) return false;
         if (!Objects.equals(name, user.name)) return false;
@@ -103,7 +114,7 @@ public class User {
 
     @Override
     public int hashCode() {
-        int result = ID;
+        int result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (registrationDate != null ? registrationDate.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
@@ -116,7 +127,7 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "ID=" + ID +
+                "ID=" + id +
                 ", name='" + name + '\'' +
                 ", registrationDate=" + registrationDate +
                 ", email='" + email + '\'' +
