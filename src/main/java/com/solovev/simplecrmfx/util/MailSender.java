@@ -35,7 +35,7 @@ public class MailSender {
         this.to = to;
     }
 
-    public void send(String subject, String text) {
+    public boolean send(String subject, String text) {
         String host = "smtp.mail.ru";
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -61,6 +61,7 @@ public class MailSender {
             message.setSubject(subject);
             message.setText(text);
             Transport.send(message);
+            return true;
         }catch (MessagingException e){
             e.printStackTrace();
             throw new IllegalArgumentException("Error sending message!");

@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 public class MainController {
     @FXML
     public TableView<User> tableView = new TableView<>();
-    private FileChooser fileChooser = new FileChooser();
+    private final FileChooser fileChooser = new FileChooser();
     private File chosenFile;
 
     public void initialize() {
@@ -36,9 +36,10 @@ public class MainController {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
 
+        //factory for checkbox
         zeroColumn.setCellFactory(tableColumn ->
                 new TableCell<User, Boolean>() {
-                    CheckBox btn = new CheckBox();
+                    final CheckBox btn = new CheckBox();
 
                     {
                         btn.setDisable(true);
@@ -60,10 +61,10 @@ public class MainController {
                     }
                 }
         );
-
+        //factory for button
         actionColumn.setCellFactory(tableColumn ->
                 new TableCell<User, String>() {
-                    Button btn = new Button("Send email");
+                    final Button btn = new Button("Send email");
 
                     {
                         btn.getStyleClass().add("primary");
@@ -97,7 +98,7 @@ public class MainController {
         ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
         countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
 
-        fourthColumn.getColumns().setAll(registrationDateColumn, ageColumn, countryColumn);
+        fourthColumn.getColumns().setAll(registrationDateColumn, ageColumn, countryColumn); //todo why it shows attention?
 
         tableView
                 .getColumns()

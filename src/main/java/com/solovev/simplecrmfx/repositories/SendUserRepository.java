@@ -2,7 +2,6 @@ package com.solovev.simplecrmfx.repositories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.solovev.simplecrmfx.model.User;
 import com.solovev.simplecrmfx.util.Constants;
 
 import java.io.IOException;

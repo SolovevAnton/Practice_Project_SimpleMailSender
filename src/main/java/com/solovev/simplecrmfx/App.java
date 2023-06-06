@@ -6,6 +6,7 @@ import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -70,17 +71,18 @@ public class App extends Application {
      * @param title of the stage
      * @param data  to pass to the stage, or null if nothing
      * @return created stage
-     * @throws IOException
      */
     public static <T> Stage openWindowAndWait(String name, String title, T data) {
         Stage stage = null;
         try {
             stage = getStage(name, title, data);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.showAndWait();
+
         return stage;
     }
 
@@ -93,5 +95,19 @@ public class App extends Application {
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.close();
+    }
+    /**
+     * Creates and shows alert without header
+     *
+     * @param title     title of the alert
+     * @param content   content of the alert
+     * @param alertType type
+     */
+    public static void showAlertWithoutHeaderText(String title, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

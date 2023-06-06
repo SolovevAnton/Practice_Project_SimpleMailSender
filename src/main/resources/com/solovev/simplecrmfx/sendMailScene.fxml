@@ -52,6 +52,6 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <TextField fx:id="textFieldTopic" editable="false" layoutX="51.0" layoutY="142.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="330.0" promptText="Topic of the E mail" />
+      <TextField fx:id="textFieldSubject" layoutX="51.0" layoutY="142.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="330.0" promptText="Topic of the E mail" />
     </children>
 </AnchorPane>
