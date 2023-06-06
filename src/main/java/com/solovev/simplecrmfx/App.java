@@ -72,8 +72,13 @@ public class App extends Application {
      * @return created stage
      * @throws IOException
      */
-    public static <T> Stage openWindowAndWait(String name, String title, T data) throws IOException {
-        Stage stage = getStage(name, title, data);
+    public static <T> Stage openWindowAndWait(String name, String title, T data) {
+        Stage stage = null;
+        try {
+            stage = getStage(name, title, data);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.showAndWait();
         return stage;

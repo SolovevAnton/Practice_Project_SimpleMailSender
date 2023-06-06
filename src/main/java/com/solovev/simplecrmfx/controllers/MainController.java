@@ -1,20 +1,16 @@
 package com.solovev.simplecrmfx.controllers;
 
+import com.solovev.simplecrmfx.App;
 import com.solovev.simplecrmfx.model.User;
+import com.solovev.simplecrmfx.repositories.SendUserRepository;
 import com.solovev.simplecrmfx.repositories.UserRepository;
-import javafx.application.Application;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.util.Callback;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +20,7 @@ public class MainController {
     @FXML
     public TableView<User> tableView = new TableView<>();
     private FileChooser fileChooser = new FileChooser();
+    private File chosenFile;
 
     public void initialize() {
         //main columns initialization
@@ -80,7 +77,10 @@ public class MainController {
                             setGraphic(null);
                             setText(null);
                         } else {
-                            btn.setOnAction(event -> {});
+                            btn.setOnAction(event -> {
+                                App.openWindowAndWait("sendMailScene.fxml", "Mail to user", tableView.getItems().get(getIndex()));
+                                reloadTable();
+                            });
                             setGraphic(btn);
                             setText(null);
                         }
@@ -104,7 +104,7 @@ public class MainController {
                 .setAll(zeroColumn, idColumn, nameColumn, emailColumn, fourthColumn, actionColumn);
     }
 
-    public void menuItemOpen(ActionEvent actionEvent) throws IOException {
+    public void menuItemOpen(ActionEvent actionEvent) {
         File root = new File(System.getProperty("user.dir"));
         fileChooser.setInitialDirectory(root);
         fileChooser
@@ -113,10 +113,31 @@ public class MainController {
                         new FileChooser.ExtensionFilter("txt", "*.txt")
                 );
 
-        File chosenFile = fileChooser.showOpenDialog(null);
+        chosenFile = fileChooser.showOpenDialog(null);
+        reloadTable();
+    }
+
+    /**
+     * reloads tableView based on the sendUsers data
+     */
+    private void reloadTable() {
         if (chosenFile != null) {
-            UserRepository repo = new UserRepository(chosenFile);
-            tableView.setItems(FXCollections.observableList(repo.getUsers()));
+            try {
+                UserRepository repo = new UserRepository(chosenFile);
+                tableView.setItems(FXCollections.observableList(repo.getUsers()));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
+    }
+
+    /**
+     * Deletes all data from send User data
+     *
+     * @param actionEvent button action
+     */
+    public void refreshButton(ActionEvent actionEvent) {
+        new SendUserRepository().clear();
+        reloadTable();
     }
 }

@@ -1,9 +1,11 @@
 package com.solovev.simplecrmfx.model;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDateTime;
 import java.util.Objects;
-
-import com.fasterxml.jackson.annotation.*;
 
 public class User {
     @JsonAlias("ID")
