@@ -10,10 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -42,7 +39,8 @@ public class MainController {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
 
-        zeroColumn.setCellFactory((user) -> new TableCell<User, Boolean>() {
+        zeroColumn.setCellFactory(tableColumn ->
+                new TableCell<User, Boolean>() {
                     CheckBox btn = new CheckBox();
 
                     {
@@ -66,11 +64,38 @@ public class MainController {
                 }
         );
 
+        actionColumn.setCellFactory(tableColumn ->
+                new TableCell<User, String>() {
+                    Button btn = new Button("Send email");
+
+                    {
+                        btn.getStyleClass().add("primary");
+                        btn.setAlignment(Pos.CENTER);
+                    }
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            btn.setOnAction(event -> {});
+                            setGraphic(btn);
+                            setText(null);
+                        }
+                    }
+                }
+        );
+
         //personal data columns
         TableColumn<User, TableColumn<User, ?>> fourthColumn = new TableColumn<>("Personal data");
         TableColumn<User, LocalDateTime> registrationDateColumn = new TableColumn<>("Registration date");
         TableColumn<User, Integer> ageColumn = new TableColumn<>("Age");
         TableColumn<User, String> countryColumn = new TableColumn<>("Country");
+        registrationDateColumn.setCellValueFactory(new PropertyValueFactory<>("registrationDate"));
+        ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
+        countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
 
         fourthColumn.getColumns().setAll(registrationDateColumn, ageColumn, countryColumn);
 
