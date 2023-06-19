@@ -1,5 +1,5 @@
 # Practice_Project_SimpleMailSender
-Project working with tables in JavaFX, Jackson, Files amd Mail.ru api;
+Practice project to work with tables in JavaFX, Jackson, Files amd Mail.ru api;
 
 Done in 9 hours
 
