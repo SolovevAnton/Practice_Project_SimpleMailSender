@@ -24,7 +24,6 @@ public class MainController {
 
     public void initialize() {
         //main columns initialization
-        //todo format columns to match strings?
         TableColumn<User, Boolean> zeroColumn = new TableColumn<>("Mail sent");
         TableColumn<User, String> idColumn = new TableColumn<>("ID");
         TableColumn<User, String> nameColumn = new TableColumn<>("Name");
@@ -98,7 +97,7 @@ public class MainController {
         ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
         countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
 
-        fourthColumn.getColumns().setAll(registrationDateColumn, ageColumn, countryColumn); //todo why it shows attention?
+        fourthColumn.getColumns().setAll(registrationDateColumn, ageColumn, countryColumn);
 
         tableView
                 .getColumns()

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.solovev.simplecrmfx.util.Constants;
 
 import java.io.IOException;
-import java.nio.file.Path;
 
 /**
  * Repository to store mail login

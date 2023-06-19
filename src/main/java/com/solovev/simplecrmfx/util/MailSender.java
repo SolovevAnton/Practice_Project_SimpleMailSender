@@ -5,35 +5,32 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-/*
- * Добавьте зависимости из указанных ссылок для использования этого класса:
- * https://mvnrepository.com/artifact/javax.mail/javax.mail-api
- * https://mvnrepository.com/artifact/com.sun.mail/javax.mail
- */
 
 /**
- * @author Kotov Kirill
+ * class to send mail, with mail.ru account
  */
 public class MailSender {
-    private String from;
-    private String password;
-    private String to;
+    private final String from;
+    private final String password;
+    private final String to;
 
     /**
-     * Конструктор задает параметры: от кого отправка, пароль, кому
-     * 1. Создайте новый аккаунт на почте mail.ru
-     * 2. Зайдите в раздел "Пароль и безопасность"
-     * 3. Выберите вкладку "Пароли для внешних приложений"
-     * 4. Нажмите добавить, введите название java и запишите сгенерированный пароль
-     * @param from Ваш аккаунт на mail.ru
-     * @param password Ваш сгенерированный пароль для внешних приложений
-     * @param to Аккаунт, кому производится отправка
+     * @param from mail.ru account
+     * @param password pass for external apps
+     * @param to mail where to send the letter
      */
     public MailSender(String from, String password, String to) {
         this.from = from;
         this.password = password;
         this.to = to;
     }
+
+    /**
+     * Method to define mail
+     * @param subject of the mail
+     * @param text of the mail
+     * @return true if send successfully, error otherwise
+     */
 
     public boolean send(String subject, String text) {
         String host = "smtp.mail.ru";

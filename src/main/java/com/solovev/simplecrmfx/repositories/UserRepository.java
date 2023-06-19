@@ -40,5 +40,5 @@ public class UserRepository {
 
     public List<User> getUsers() {
         return new ArrayList<>(users);
-    } //TODO correct? returns List or unmodifiable list
+    }
 }
